@@ -2,12 +2,14 @@ import React from 'react';
 import ProfileStore from '../stores/ProfileStore'
 import ProfileActions from '../actions/ProfileActions'
 import Profile from './Profile'
-
+import Interests from './Interests'
+import InterestForm from './InterestForm'
 
 const App = React.createClass({
   getInitialState() {
     return {
-      profileInfo: ProfileStore.getAll()
+      profileInfo: ProfileStore.getAll(),
+      profileInterests: ProfileStore.getInterest()
     }
   },
 
@@ -25,19 +27,27 @@ const App = React.createClass({
     ProfileActions.profilePic(newProfile.pic);
   },
 
+  newInterest(interest) {
+    console.log(interest)
+    ProfileActions.createInterest(interest);
+  },
+
   _onChange() {
     this.setState({
-      profileInfo: ProfileStore.getAll()
+      profileInfo: ProfileStore.getAll(),
+      profileInterests: ProfileStore.getInterest()
     });
   },
 
   render() {
-    const {profileInfo} = this.state;
-    console.log("this is my profile Object: ", profileInfo);
+    const {profileInfo, profileInterests} = this.state;
+    console.log("this is my interests Object: ", profileInterests);
 
     return (
       <div> 
         <Profile sendToEdit={profileInfo} newInfo={this.editInfo}/>
+        <Interests sendInterests={profileInterests} />
+        <InterestForm addInterest={this.newInterest}/>
       </div>
       )
   }

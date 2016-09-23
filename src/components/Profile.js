@@ -9,7 +9,7 @@ const Profile = React.createClass({
     let newProfile = {
       name: name.value,
       bio: bio.value,
-      pic: pic.value
+      pic: pic.value,
     }
     this.props.newInfo(newProfile);
     //document.getElementById('overlay').style.display = 'hide';
@@ -37,10 +37,10 @@ const Profile = React.createClass({
         <div id="overlay">
           <div className="row col-xs-12">
             <input className='col-xs-4'ref="name" type="text" placeholder='Your name' required/>
-            <input className='col-xs-8' ref="bio" placeholder='Some info about you' required/>           
+            <input className='col-xs-8' ref="bio"  placeholder='Some info about you' />           
           </div>
         <div className="row col-xs-12">
-         <input className="col-xs-4" ref="pic" type='text' placeholder='Pic URL' required/>
+         <input className="col-xs-4" ref="pic" type='text' placeholder='Pic URL' />
         </div> 
       </div>
           <button className="btn btn-primary" onClick={this.toggle}>Edit Profile</button>

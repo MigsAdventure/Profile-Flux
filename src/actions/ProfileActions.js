@@ -23,6 +23,13 @@ const ProfileActions = {
       type: 'CREATE_PIC',
       payload:{pic}
     });
+  },
+
+  createInterest(interest) {
+    AppDispatcher.dispatch({
+      type: 'CREATE_INTEREST',
+      payload: {interest},     
+   });
   }
 }
 

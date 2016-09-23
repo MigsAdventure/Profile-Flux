@@ -21441,13 +21441,22 @@
 
 	var _Profile2 = _interopRequireDefault(_Profile);
 
+	var _Interests = __webpack_require__(181);
+
+	var _Interests2 = _interopRequireDefault(_Interests);
+
+	var _InterestForm = __webpack_require__(182);
+
+	var _InterestForm2 = _interopRequireDefault(_InterestForm);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var App = _react2.default.createClass({
 	  displayName: 'App',
 	  getInitialState: function getInitialState() {
 	    return {
-	      profileInfo: _ProfileStore2.default.getAll()
+	      profileInfo: _ProfileStore2.default.getAll(),
+	      profileInterests: _ProfileStore2.default.getInterest()
 	    };
 	  },
 	  componentWillMount: function componentWillMount() {
@@ -21461,20 +21470,29 @@
 	    _ProfileActions2.default.profileBio(newProfile.bio);
 	    _ProfileActions2.default.profilePic(newProfile.pic);
 	  },
+	  newInterest: function newInterest(interest) {
+	    console.log(interest);
+	    _ProfileActions2.default.createInterest(interest);
+	  },
 	  _onChange: function _onChange() {
 	    this.setState({
-	      profileInfo: _ProfileStore2.default.getAll()
+	      profileInfo: _ProfileStore2.default.getAll(),
+	      profileInterests: _ProfileStore2.default.getInterest()
 	    });
 	  },
 	  render: function render() {
-	    var profileInfo = this.state.profileInfo;
+	    var _state = this.state;
+	    var profileInfo = _state.profileInfo;
+	    var profileInterests = _state.profileInterests;
 
-	    console.log("this is my profile Object: ", profileInfo);
+	    console.log("this is my interests Object: ", profileInterests);
 
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(_Profile2.default, { sendToEdit: profileInfo, newInfo: this.editInfo })
+	      _react2.default.createElement(_Profile2.default, { sendToEdit: profileInfo, newInfo: this.editInfo }),
+	      _react2.default.createElement(_Interests2.default, { sendInterests: profileInterests }),
+	      _react2.default.createElement(_InterestForm2.default, { addInterest: this.newInterest })
 	    );
 	  }
 	});
@@ -21501,9 +21519,11 @@
 
 	var _profileInfo = {
 	  name: 'Miguel Pardo',
-	  bio: 'I love coding and longboarding! This is a sample bio. Click this box to edit!',
+	  bio: 'I love coding and longboarding! This is a sample bio.',
 	  pic: 'https://scontent.fsnc1-2.fna.fbcdn.net/v/t1.0-9/12745915_1303263976366835_6067711188026501456_n.jpg?oh=1ad048f060b061a4b32ae1f58ad593c9&oe=586A2E63'
 	};
+
+	var _profileInterests = [];
 
 	var ProfileStore = Object.assign({}, _events.EventEmitter.prototype, {
 	  startListening: function startListening(callback) {
@@ -21514,6 +21534,9 @@
 	  },
 	  getAll: function getAll() {
 	    return _profileInfo;
+	  },
+	  getInterest: function getInterest() {
+	    return _profileInterests;
 	  }
 	});
 
@@ -21523,6 +21546,7 @@
 	  var name = payload.name;
 	  var bio = payload.bio;
 	  var pic = payload.pic;
+	  var interest = payload.interest;
 
 	  switch (type) {
 	    case 'CREATE_NAME':
@@ -21537,6 +21561,11 @@
 	    case 'CREATE_PIC':
 	      _profileInfo.pic = pic;
 	      ProfileStore.emit('CHANGE');
+	      break;
+	    case 'CREATE_INTEREST':
+	      _profileInterests.push(interest);
+	      ProfileStore.emit('CHANGE');
+	      break;
 	  }
 	});
 
@@ -22214,6 +22243,12 @@
 	      type: 'CREATE_PIC',
 	      payload: { pic: pic }
 	    });
+	  },
+	  createInterest: function createInterest(interest) {
+	    _AppDispatcher2.default.dispatch({
+	      type: 'CREATE_INTEREST',
+	      payload: { interest: interest }
+	    });
 	  }
 	}; //Interacts with names. Actions creaters
 	exports.default = ProfileActions;
@@ -22288,12 +22323,12 @@
 	            "div",
 	            { className: "row col-xs-12" },
 	            _react2.default.createElement("input", { className: "col-xs-4", ref: "name", type: "text", placeholder: "Your name", required: true }),
-	            _react2.default.createElement("input", { className: "col-xs-8", ref: "bio", placeholder: "Some info about you", required: true })
+	            _react2.default.createElement("input", { className: "col-xs-8", ref: "bio", placeholder: "Some info about you" })
 	          ),
 	          _react2.default.createElement(
 	            "div",
 	            { className: "row col-xs-12" },
-	            _react2.default.createElement("input", { className: "col-xs-4", ref: "pic", type: "text", placeholder: "Pic URL", required: true })
+	            _react2.default.createElement("input", { className: "col-xs-4", ref: "pic", type: "text", placeholder: "Pic URL" })
 	          )
 	        ),
 	        _react2.default.createElement(
@@ -22307,6 +22342,73 @@
 	});
 
 	module.exports = Profile;
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Interests = function Interests(props) {
+	  var sendInterests = props.sendInterests;
+
+	  return _react2.default.createElement(
+	    'ul',
+	    null,
+	    sendInterests.map(function (interest, i) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: i },
+	        interest
+	      );
+	    })
+	  );
+	};
+
+	module.exports = Interests;
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var InterestForm = React.createClass({
+	  displayName: 'InterestForm',
+	  submitForm: function submitForm(e) {
+	    e.preventDefault();
+	    var interest = this.refs.interest;
+
+
+	    var newInterest = interest.value;
+	    interest.value = '';
+	    interest.focus();
+
+	    this.props.addInterest(newInterest);
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'form',
+	      { onSubmit: this.submitForm },
+	      React.createElement('input', { className: 'text-center', ref: 'interest', type: 'text', id: 'interestIn', placeholder: 'Interests' }),
+	      React.createElement(
+	        'button',
+	        { className: 'btn btn-secondary' },
+	        'Add'
+	      )
+	    );
+	  }
+	});
+
+	module.exports = InterestForm;
 
 /***/ }
 /******/ ]);
