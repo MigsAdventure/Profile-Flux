@@ -12,28 +12,32 @@ body {
   font-size:2.5em;
 }
 
+#mainContainer {
+  text-align: center;
+  margin-top:8em;
+}
+
 #imageContainer {
-  height:5em;
-  width:5em;
-  display:inline-block;
+
 }
 
 img {
-  max-width: 200px;
-  max-height: 200px;
+  max-width: 150px;
+  max-height: 150px;
 }
 
 
 #bioContainer {
-  height:10em;
-  width:8em;
-  display:inline-block;
+  max-width:20em;
 }
 
 #nameContainer {
-  display:inline-block;
   font-size:1em;
 }
 p {
   font-size: 16px;
+}
+
+input {
+  display:none;
 }

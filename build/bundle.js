@@ -22246,7 +22246,7 @@
 	    };
 	    this.props.newInfo(newProfile);
 	  },
-	  toggle: function toggle() {},
+	  toggle: function toggle(e) {},
 	  render: function render() {
 	    var sendToEdit = this.props.sendToEdit;
 
@@ -22256,16 +22256,16 @@
 	      { id: "mainContainer", onSubmit: this.submit },
 	      _react2.default.createElement(
 	        "div",
-	        { "class": "row" },
+	        { className: "row col-xs-12" },
 	        _react2.default.createElement(
 	          "div",
-	          { id: "imageContainer" },
-	          _react2.default.createElement("img", { ref: "picSrc", src: sendToEdit.pic }),
+	          { id: "imageContainer", className: "col-xs-4" },
+	          _react2.default.createElement("img", { src: sendToEdit.pic }),
 	          _react2.default.createElement("input", { ref: "pic", type: "text" })
 	        ),
 	        _react2.default.createElement(
 	          "div",
-	          { id: "bioContainer", type: "text" },
+	          { id: "bioContainer", type: "text", className: "col-xs-8" },
 	          _react2.default.createElement(
 	            "p",
 	            null,
@@ -22276,10 +22276,10 @@
 	      ),
 	      _react2.default.createElement(
 	        "div",
-	        { "class": "row" },
+	        { className: "row col-xs-12" },
 	        _react2.default.createElement(
 	          "div",
-	          { id: "nameContainer" },
+	          { id: "nameContainer", className: "col-xs-4" },
 	          _react2.default.createElement(
 	            "h2",
 	            null,
@@ -22290,7 +22290,7 @@
 	      ),
 	      _react2.default.createElement(
 	        "button",
-	        { className: "btn btn-primary" },
+	        { className: "btn btn-primary", onClick: this.toggle },
 	        "Edit Profile"
 	      )
 	    );

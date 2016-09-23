@@ -14,34 +14,32 @@ const Profile = React.createClass({
     this.props.newInfo(newProfile);
   },
 
-  toggle(){
-
-  },
-
+  toggle(e) {
+   
+},
 
   render() {
     let {sendToEdit} = this.props;
     console.log("Current image: ", sendToEdit.pic)
    return (
     <form id="mainContainer" onSubmit={this.submit}>
-      <div class="row">
-        <div id="imageContainer">
-          <img ref="picSrc" src={sendToEdit.pic}/>
+      <div className="row col-xs-12">
+        <div id="imageContainer" className="col-xs-4">
+          <img src={sendToEdit.pic}/>
           <input ref="pic" type='text'/>
         </div>
-        <div id="bioContainer" type="text">
+        <div id="bioContainer" type="text" className="col-xs-8">
           <p>{sendToEdit.bio}</p>
           <input ref="bio"/>
         </div>
       </div>
-      <div class="row">
-        <div id="nameContainer">
+      <div className="row col-xs-12">
+        <div id="nameContainer" className="col-xs-4">
           <h2>{sendToEdit.name}</h2>
           <input ref="name" type="text"/>
         </div>
        </div> 
-      
-      <button className="btn btn-primary">Edit Profile</button>
+      <button className="btn btn-primary" onClick={this.toggle}>Edit Profile</button>
     </form>
    ) 
   }
