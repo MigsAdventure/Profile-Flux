@@ -22245,6 +22245,7 @@
 	      pic: pic.value
 	    };
 	    this.props.newInfo(newProfile);
+	    //document.getElementById('overlay').style.display = 'hide';
 	  },
 	  toggle: function toggle(e) {},
 	  render: function render() {
@@ -22252,46 +22253,54 @@
 
 	    console.log("Current image: ", sendToEdit.pic);
 	    return _react2.default.createElement(
-	      "form",
-	      { id: "mainContainer", onSubmit: this.submit },
+	      "div",
+	      null,
 	      _react2.default.createElement(
 	        "div",
-	        { className: "row col-xs-12" },
+	        { id: "contentContainer" },
 	        _react2.default.createElement(
 	          "div",
-	          { id: "imageContainer", className: "col-xs-4" },
-	          _react2.default.createElement("img", { src: sendToEdit.pic }),
-	          _react2.default.createElement("input", { ref: "pic", type: "text" })
+	          { className: "row col-xs-12" },
+	          _react2.default.createElement("img", { className: "col-xs-4", src: sendToEdit.pic }),
+	          _react2.default.createElement(
+	            "p",
+	            { className: "col-xs-8" },
+	            sendToEdit.bio
+	          )
 	        ),
 	        _react2.default.createElement(
 	          "div",
-	          { id: "bioContainer", type: "text", className: "col-xs-8" },
-	          _react2.default.createElement(
-	            "p",
-	            null,
-	            sendToEdit.bio
-	          ),
-	          _react2.default.createElement("input", { ref: "bio" })
-	        )
-	      ),
-	      _react2.default.createElement(
-	        "div",
-	        { className: "row col-xs-12" },
-	        _react2.default.createElement(
-	          "div",
-	          { id: "nameContainer", className: "col-xs-4" },
+	          { id: "imageContainer", className: "col-xs-12" },
 	          _react2.default.createElement(
 	            "h2",
-	            null,
+	            { className: "col-xs-4" },
 	            sendToEdit.name
-	          ),
-	          _react2.default.createElement("input", { ref: "name", type: "text" })
+	          )
 	        )
 	      ),
 	      _react2.default.createElement(
-	        "button",
-	        { className: "btn btn-primary", onClick: this.toggle },
-	        "Edit Profile"
+	        "form",
+	        { onSubmit: this.submit, id: "overLay", className: "col-xs-12" },
+	        _react2.default.createElement(
+	          "div",
+	          { id: "overlay" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "row col-xs-12" },
+	            _react2.default.createElement("input", { className: "col-xs-4", ref: "name", type: "text", placeholder: "Your name", required: true }),
+	            _react2.default.createElement("input", { className: "col-xs-8", ref: "bio", placeholder: "Some info about you", required: true })
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "row col-xs-12" },
+	            _react2.default.createElement("input", { className: "col-xs-4", ref: "pic", type: "text", placeholder: "Pic URL", required: true })
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "button",
+	          { className: "btn btn-primary", onClick: this.toggle },
+	          "Edit Profile"
+	        )
 	      )
 	    );
 	  }

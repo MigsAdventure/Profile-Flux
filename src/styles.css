@@ -10,34 +10,10 @@ html {
 body {
   text-align: center;
   font-size:2.5em;
+  height:100%;
 }
 
-#mainContainer {
-  text-align: center;
-  margin-top:8em;
-}
-
-#imageContainer {
-
-}
-
-img {
-  max-width: 150px;
-  max-height: 150px;
-}
-
-
-#bioContainer {
-  max-width:20em;
-}
-
-#nameContainer {
-  font-size:1em;
-}
-p {
-  font-size: 16px;
-}
-
-input {
-  display:none;
+#contentContainer {
+  margin-top:5em;
+  height:15em;
 }

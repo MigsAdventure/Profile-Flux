@@ -12,6 +12,7 @@ const Profile = React.createClass({
       pic: pic.value
     }
     this.props.newInfo(newProfile);
+    //document.getElementById('overlay').style.display = 'hide';
   },
 
   toggle(e) {
@@ -22,25 +23,30 @@ const Profile = React.createClass({
     let {sendToEdit} = this.props;
     console.log("Current image: ", sendToEdit.pic)
    return (
-    <form id="mainContainer" onSubmit={this.submit}>
-      <div className="row col-xs-12">
-        <div id="imageContainer" className="col-xs-4">
-          <img src={sendToEdit.pic}/>
-          <input ref="pic" type='text'/>
+    <div>
+        <div id="contentContainer">
+          <div className="row col-xs-12">
+            <img className="col-xs-4" src={sendToEdit.pic}/>
+            <p className="col-xs-8">{sendToEdit.bio}</p>
+          </div>
+          <div id="imageContainer" className="col-xs-12">
+            <h2 className="col-xs-4">{sendToEdit.name}</h2>
+          </div>
         </div>
-        <div id="bioContainer" type="text" className="col-xs-8">
-          <p>{sendToEdit.bio}</p>
-          <input ref="bio"/>
-        </div>
+        <form onSubmit={this.submit} id="overLay" className="col-xs-12">
+        <div id="overlay">
+          <div className="row col-xs-12">
+            <input className='col-xs-4'ref="name" type="text" placeholder='Your name' required/>
+            <input className='col-xs-8' ref="bio" placeholder='Some info about you' required/>           
+          </div>
+        <div className="row col-xs-12">
+         <input className="col-xs-4" ref="pic" type='text' placeholder='Pic URL' required/>
+        </div> 
       </div>
-      <div className="row col-xs-12">
-        <div id="nameContainer" className="col-xs-4">
-          <h2>{sendToEdit.name}</h2>
-          <input ref="name" type="text"/>
-        </div>
-       </div> 
-      <button className="btn btn-primary" onClick={this.toggle}>Edit Profile</button>
-    </form>
+          <button className="btn btn-primary" onClick={this.toggle}>Edit Profile</button>
+        </form>
+    </div>
+    
    ) 
   }
 });
